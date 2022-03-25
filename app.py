@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/teste', methods=['POST'])
 def teste():
     if request.method == 'POST':
-        print(request.JSON)
+        print(request.json)
         return 'Success',200
     else:
         abort(400)
