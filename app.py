@@ -8,10 +8,9 @@ app = Flask(__name__)
 def teste():
     if request.method == 'POST':
         print(request.json)
-        return request.json,200
+        return "success",200
     else:
         abort(400)
-
 
 if __name__ == '__main__':
     server_port = os.environ.get('PORT', '8080')
