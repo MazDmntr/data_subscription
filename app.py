@@ -8,7 +8,7 @@ app = Flask(__name__)
 def teste():
     if request.method == 'POST':
         print(request.json)
-        return 'Success',200
+        return request.json,200
     else:
         abort(400)
 
