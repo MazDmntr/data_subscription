@@ -1,73 +1,50 @@
-# Kubernetes Hello World with Cloud Code
+# Cloud Run Hello World with Cloud Code
 
-"Hello World" is a Kubernetes application that contains a single
-[Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) and a corresponding
-[Service](https://kubernetes.io/docs/concepts/services-networking/service/). The Deployment contains a web server that renders a simple webpage.
+"Hello World" is a [Cloud Run](https://cloud.google.com/run/docs) application that renders a simple webpage.
 
-For details on how to use this sample as a template in Cloud Code, read the documentation for Cloud Code for [VS Code](https://cloud.google.com/code/docs/vscode/quickstart-local-dev?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-) or [IntelliJ](https://cloud.google.com/code/docs/intellij/quickstart-k8s?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-).
+For details on how to use this sample as a template in Cloud Code, read the documentation for Cloud Code for [VS Code](https://cloud.google.com/code/docs/vscode/quickstart-cloud-run?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-) or [IntelliJ](https://cloud.google.com/code/docs/intellij/quickstart-cloud-run?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-).
 
 ### Table of Contents
-* [What's in this sample](#whats-in-this-sample)
 * [Getting Started with VS Code](#getting-started-with-vs-code)
 * [Getting Started with IntelliJ](#getting-started-with-intellij)
 * [Sign up for User Research](#sign-up-for-user-research)
 
 ---
-## What's in this sample
-### Kubernetes architecture
-![Kubernetes Architecture Diagram](./img/diagram.png)
-
-### Directory contents
-
-- `skaffold.yaml` - A schema file that defines skaffold configurations ([skaffold.yaml reference](https://skaffold.dev/docs/references/yaml/))
-- `kubernetes-manifests/` - Contains Kubernetes YAML files for the Guestbook services and deployments, including:
-
-  - `hello.deployment.yaml` - deploys a pod with the 'python-hello-world' container image
-  - `hello.service.yaml` - creates a load balancer and exposes the 'python-hello-world' service on an external IP in the cluster
-
----
 ## Getting Started with VS Code
 
-### Run the app locally with minikube
+### Run the app locally with the Cloud Run Emulator
+1. Click on the Cloud Code status bar and select 'Run on Cloud Run Emulator'.  
+![image](./img/status-bar.png)
 
-1. To run your application, click on the Cloud Code status bar and select ‘Run on Kubernetes’.  
-![image](./img/status-bar.png) 
+2. Use the Cloud Run Emulator dialog to specify your [builder option](https://cloud.google.com/code/docs/vscode/deploying-a-cloud-run-app#deploying_a_cloud_run_service). Cloud Code supports Docker, Jib, and Buildpacks. See the skaffold documentation on [builders](https://skaffold.dev/docs/pipeline-stages/builders/) for more information about build artifact types.  
+![image](./img/build-config.png)
 
-2. Select ‘Run locally using minikube’ when prompted. Cloud Code runs your app in a local [minikube](https://minikube.sigs.k8s.io/docs/start/) cluster.  
-![image](./img/create-k8s-cluster.png)
+3. Click ‘Run’. Cloud Code begins building your image.
 
-3. View the build progress in the OUTPUT window. Once the build has finished, click on the URL in the OUTPUT window to view your live application.  
-![image](./img/kubernetes-url.png)
+4. View the build progress in the OUTPUT window. Once the build has finished, click on the URL in the OUTPUT window to view your live application.  
+![image](./img/cloud-run-url.png)
 
-4.  To stop the application, click the stop icon on the Debug Toolbar.
+5. To stop the application, click the stop icon on the Debug Toolbar.
 
 ---
 ## Getting Started with IntelliJ
 
-### Run the app locally with minikube
+### Run the app locally with the Cloud Run Emulator
 
-#### Edit run configuration
-1. Click the configuration dropdown in the top taskbar and then click **Edit Configurations**.
-![image](./img/edit-configurations.png)
+#### Define run configuration
 
-   The **Develop on Kubernetes** configuration watches for changes, then uses [skaffold](https://skaffold.dev/docs/) to rebuild and rerun your app. You can customize your deployment by making changes to this run configuration or by creating a new Cloud Code: Kubernetes run configuration.
+1. Click the Run/Debug configurations dropdown on the top taskbar and select 'Edit Configurations'.  
+![image](./img/edit-config.png)
 
+2. Select 'Cloud Run: Run Locally' and specify your [builder option](https://cloud.google.com/code/docs/intellij/developing-a-cloud-run-app#defining_your_run_configuration). Cloud Code supports Docker, Jib, and Buildpacks. See the skaffold documentation on [builders](https://skaffold.dev/docs/pipeline-stages/builders/) for more information about build artifact types.  
+![image](./img/local-build-config.png)
 
-3. Under **Run > Deployment**, select 'Deploy locally to a minikube cluster'.
-![image](./img/run-debug-dialog.png)
+#### Run the application
+1. Click the Run/Debug configurations dropdown and select 'Cloud Run: Run Locally'. Click the run icon.  
+![image](./img/config-run-locally.png)
 
-4. Click **OK** to save your configuration. 
-
-
-#### Run the app on minikube
-1. Select **Develop on Kubernetes** from the configuration dropdown and click the run icon. Cloud Code runs your app in a local [minikube](ttps://minikube.sigs.k8s.io/docs/start/) cluster.  
-![image](./img/edit-configurations.png)
-
-
-2. View the build process in the output window. When the deployment is successful, you're notified that new service URLs are available. Click the Service URLs tab to view the URL(s), then click the URL link to open your browser with your running application.  
-![image](./img/service-urls.png)
-
-3. To stop the application, click the stop icon next to the configuration dropdown.
+2. View the build process in the output window. Once the build has finished, you will receive a notification from the Event Log. Click 'View' to access the local URLs for your deployed services.  
+![image](./img/local-success.png)
 
 ---
 ## Sign up for User Research

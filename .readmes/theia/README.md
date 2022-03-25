@@ -1,81 +1,56 @@
-# Kubernetes Hello World with Cloud Code
+# Cloud Run Hello World with Cloud Code
 
-This "Hello World" sample demonstrates how to deploy a simple "Hello World" application to Kubernetes using the Cloud Code extension for Cloud Shell. When you run the application, Cloud Code uses [skaffold](https://skaffold.dev/docs/) under the hood to build an image and deploy the project's Kubernetes manifests. To learn more about Kubernetes, explore the [Kubernetes overview](https://kubernetes.io/docs/concepts/overview/). 
+
+This "Hello World" sample demonstrates how to deploy a simple "Hello World" application to Cloud Run using the Cloud Code extension for Cloud Shell.
 
 ### Table of Contents
-* [What's in this sample](#whats-in-this-sample)
 * [Getting Started](#getting-started)
-    1. [Run the app locally with minikube](#run-the-app-locally-with-minikube)
-    2. [Run the app remotely with Google Kubernetes Engine](#run-the-app-remotely-with-google-kubernetes-engine)
-        * [Set up a GKE cluster](#set-up-a-gke-cluster)
-        * [Deploy app to GKE](#deploy-app-to-gke)
+    1. [Run the app locally with the Cloud Run Emulator](#run-the-app-locally-with-the-cloud-run-emulator)
+    2. [Deploy to Cloud Run](#deploy-to-cloud-run)
 * [Next steps](#next-steps)
-* [Sign up for user research](#sign-up-for-user-research)
-
----
-## What's in this sample
-### Kubernetes architecture
-![Kubernetes Architecture Diagram](../../img/diagram.png)
-
-### Directory contents
-
-- `skaffold.yaml` - A schema file that defines skaffold configurations ([skaffold.yaml reference](https://skaffold.dev/docs/references/yaml/))
-- `kubernetes-manifests/` - Contains Kubernetes YAML files for the Guestbook services and deployments, including:
-
-  - `hello.deployment.yaml` - deploys a pod with the 'python-hello-world' container image
-  - `hello.service.yaml` - creates a load balancer and exposes the 'python-hello-world' service on an external IP in the cluster
+* [Sign up for User Research](#sign-up-for-user-research)
 
 ---
 ## Getting Started
 
-### Run the app locally with minikube
+### Run the app locally with the Cloud Run Emulator
+1. Click on the Cloud Code status bar and select 'Run on Cloud Run Emulator'.  
+![image](./img/status-bar.png)
 
-1. To run your application, click on the Cloud Code status bar and select ‘Run on Kubernetes’.  
-![image](./img/status-bar.png) 
+2. Use the Cloud Run Emulator dialog to specify your [builder option](https://cloud.google.com/code/docs/vscode/deploying-a-cloud-run-app?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-#deploying_a_cloud_run_service). Cloud Code supports Docker, Jib, and Buildpacks. See the skaffold documentation on [builders](https://skaffold.dev/docs/pipeline-stages/builders/) for more information about build artifact types.  
+![image](./img/build-config.png)
 
-2. Select ‘Run locally using minikube’ when prompted. Cloud Code runs your app in a local [minikube](https://minikube.sigs.k8s.io/docs/start/) cluster.  
-![image](./img/create-k8s-cluster.png)
-
-3. If prompted, authorize Cloud Shell to use your credentials to make a GCP API call.  
+3. Click ‘Run’. If prompted, authorize Cloud Shell to make GCP API calls.  
 ![image](./img/authorize-cloud-shell.png)
 
 4. View the build progress in the OUTPUT window. Once the build has finished, click on the URL in the OUTPUT window to view your live application.  
-![image](./img/kubernetes-url.png)
+![image](./img/cloud-run-url.png)
 
-5.  To stop the application, click the stop icon in the Debug Explorer.  
-![image](./img/debug-explorer.png)
+5. To stop the application, navigate to the Debug window in the left side taskbar and click the stop icon.  
+![image](./img/debug-window.png)
 
----
-### Run the app remotely on Google Kubernetes Engine
+### Deploy to Cloud Run
 
-#### Set up a GKE cluster
+1. Select 'Deploy to Cloud Run' using the Cloud Code status bar.  
+![image](./img/status-bar.png)
 
-1. From the command palette, run 'Create GKE cluster'.  
-![image](./img/create-gke-cluster.png)
+2. If prompted, login to your Google Cloud account and set your project.
 
-2. Configure your new cluster using the GKE wizard and click 'Create Cluster'. Once your cluster has been created, it will be displayed in the Google Kubernetes Engine Explorer.  
-![image](./img/gke-cluster-config.png)
+3. Use the Deploy to Cloud Run dialog to specify your build option and configure your deploy settings. For more information on the configuration options available, see [Deploying a Cloud Run app](https://cloud.google.com/code/docs/vscode/deploying-a-cloud-run-app?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-).  
+![image](./img/deploy-build-config.png)
 
-3. Your new cluster will be set as the active cluster by default. To switch clusters, right click on a different cluster in the GKE Explorer and select 'Set as Active Cluster'.  
-![image](./img/kubernetes-explorer-new-cluster.png)
+4. Click 'Deploy'. Cloud Code now builds your image, pushes it to the container registry, and deploys your service to Cloud Run.
 
-#### Deploy app to GKE
-
-1. Click on the Cloud Code status bar and select ‘Run on Kubernetes’.
-
-2. If prompted, confirm the current context and image registry.  
-![image](./img/confirm-current-context.png)
-
-3. View the build’s progress in the OUTPUT window. Once the build has finished, you can visit your deployed app by clicking the URL in the OUTPUT window.  
-![image](./img/kubernetes-url.png)
+5. View your live service by clicking on the URL displayed at the top of the 'Deploy to Cloud Run' dialog.  
+![image](./img/cloud-run-deployed-url.png)
 
 ---
 ## Next steps
 * Install Cloud Code on your local [VS Code](https://cloud.google.com/code/docs/vscode/install?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-) or [IntelliJ](https://cloud.google.com/code/docs/intellij/install?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-) IDE
 * Try [debugging your app](https://cloud.google.com/code/docs/vscode/debug?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-) using Cloud Code
-* Navigate the [Kubernetes Engine Explorer](https://cloud.google.com/code/docs/vscode/using-the-gke-explorer?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-)
-* Learn how to [edit YAML files](https://cloud.google.com/code/docs/vscode/yaml-editing?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-) to deploy your Kubernetes app
-* [Configure an existing app](https://cloud.google.com/code/docs/vscode/setting-up-an-existing-app?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-) to run on Cloud Code
+* Navigate the [Cloud Run Explorer](https://cloud.google.com/code/docs/vscode/cloud-run-explorer?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-)
+* Launch the [Log Viewer](https://cloud.google.com/code/docs/vscode/logging#cloud_run_logs?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-)
+* Create a [Cloud Run for Anthos GKE cluster](https://cloud.google.com/code/docs/vscode/adding-an-anthos-gke-cluster?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-)
 * Enable [Cloud APIs and client libraries](https://cloud.google.com/code/docs/vscode/client-libraries?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-)
 * Manage secrets with [Secret Manager](https://cloud.google.com/code/docs/vscode/secret-manager?utm_source=ext&utm_medium=partner&utm_campaign=CDR_kri_gcp_cloudcodereadmes_012521&utm_content=-)
 
